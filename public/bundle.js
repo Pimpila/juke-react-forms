@@ -88,6 +88,14 @@
 	
 	var _FilterInput2 = _interopRequireDefault(_FilterInput);
 	
+	var _NewPlayList = __webpack_require__(271);
+	
+	var _NewPlayList2 = _interopRequireDefault(_NewPlayList);
+	
+	var _PlayListContainer = __webpack_require__(272);
+	
+	var _PlayListContainer2 = _interopRequireDefault(_PlayListContainer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -96,6 +104,7 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: _AppContainer2.default, foo: 'foo' },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/playlist', component: _PlayListContainer2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/albums', component: _Albums2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _Album2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _FilterableArtistsContainer2.default }),
@@ -19107,7 +19116,7 @@
 /* 152 */
 /***/ function(module, exports) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+	'use strict';
 	
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
@@ -19133,7 +19142,7 @@
 	 * @return {?DOMElement}
 	 */
 	function getActiveElement(doc) /*?DOMElement*/{
-	  doc = doc || global.document;
+	  doc = doc || (typeof document !== 'undefined' ? document : undefined);
 	  if (typeof doc === 'undefined') {
 	    return null;
 	  }
@@ -19145,7 +19154,6 @@
 	}
 	
 	module.exports = getActiveElement;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 153 */
@@ -28625,6 +28633,49 @@
 	          'ARTISTS'
 	        )
 	      )
+	    ),
+	    _react2.default.createElement('hr', null),
+	    _react2.default.createElement(
+	      'section',
+	      null,
+	      _react2.default.createElement(
+	        'h4',
+	        { className: 'text-muted' },
+	        'PLAYLISTS'
+	      ),
+	      _react2.default.createElement(
+	        'h4',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { className: 'btn btn-primary btn-block', to: '/playlist' },
+	          _react2.default.createElement('span', { className: 'glyphicon glyphicon-plus' }),
+	          ' PLAYLIST'
+	        )
+	      )
+	    ),
+	    _react2.default.createElement('hr', null),
+	    _react2.default.createElement(
+	      'ul',
+	      { className: 'list-unstyled' },
+	      _react2.default.createElement(
+	        'li',
+	        { className: 'playlist-item menu-item' },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: 'FILL_ME_IN' },
+	          'some playlist'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { className: 'playlist-item menu-item' },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: 'WHERE_TO_GO' },
+	          'another playlist'
+	        )
+	      )
 	    )
 	  );
 	};
@@ -28991,6 +29042,188 @@
 	};
 	
 	exports.default = FilterInput;
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = NewPlayList;
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function NewPlayList(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "well" },
+	    _react2.default.createElement(
+	      "form",
+	      { className: "form-horizontal", onSubmit: function onSubmit(event) {
+	          return props.showState(event);
+	        } },
+	      _react2.default.createElement(
+	        "fieldset",
+	        null,
+	        _react2.default.createElement(
+	          "legend",
+	          null,
+	          "New Playlist"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "form-group" },
+	          _react2.default.createElement(
+	            "label",
+	            { className: "col-xs-2 control-label" },
+	            "Name"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-10" },
+	            _react2.default.createElement("input", {
+	              value: props.inputValue,
+	              onChange: function onChange(event) {
+	                return props.collectInput(event);
+	              },
+	              className: "form-control",
+	              type: "text" })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "form-group" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-10 col-xs-offset-2" },
+	            _react2.default.createElement(
+	              "button",
+	              { type: "submit", disabled: props.setDisable(), className: "btn btn-success" },
+	              "Create Playlist"
+	            )
+	          )
+	        )
+	      )
+	    )
+	  );
+	}
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _axios = __webpack_require__(234);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _NewPlayList = __webpack_require__(271);
+	
+	var _NewPlayList2 = _interopRequireDefault(_NewPlayList);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlayListContainer = function (_React$Component) {
+	  _inherits(PlayListContainer, _React$Component);
+	
+	  function PlayListContainer() {
+	    _classCallCheck(this, PlayListContainer);
+	
+	    var _this = _possibleConstructorReturn(this, (PlayListContainer.__proto__ || Object.getPrototypeOf(PlayListContainer)).call(this));
+	
+	    _this.state = {
+	      inputValue: ''
+	    };
+	
+	    _this.collectInput = _this.collectInput.bind(_this);
+	    _this.showState = _this.showState.bind(_this);
+	    _this.setDisable = _this.setDisable.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(PlayListContainer, [{
+	    key: 'collectInput',
+	    value: function collectInput(event) {
+	      this.setState({
+	        inputValue: event.target.value
+	      });
+	      console.log('this.state inside collectInput', this.state);
+	    }
+	  }, {
+	    key: 'showState',
+	    value: function showState(event) {
+	      event.preventDefault();
+	      this.createPlayList(this.state.inputValue);
+	      this.setState({ inputValue: '' });
+	    }
+	  }, {
+	    key: 'setDisable',
+	    value: function setDisable() {
+	      if (this.state.inputValue.length > 16 || !this.state.inputValue) {
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	  }, {
+	    key: 'validate',
+	    value: function validate() {
+	      return this.state.inputValue.length > 16 ? _react2.default.createElement(
+	        'div',
+	        { className: 'alert alert-warning' },
+	        'Please enter a name 16 characters or less'
+	      ) : null;
+	    }
+	  }, {
+	    key: 'createPlayList',
+	    value: function createPlayList(name) {
+	      _axios2.default.post('/api/playlists/', { name: name }).then(function (res) {
+	        return res.data;
+	      }).then(function (result) {
+	        console.log(result);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.state.inputValue);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_NewPlayList2.default, { collectInput: this.collectInput, showState: this.showState, inputValue: this.state.inputValue, setDisable: this.setDisable }),
+	        this.validate()
+	      );
+	    }
+	  }]);
+	
+	  return PlayListContainer;
+	}(_react2.default.Component);
+	
+	exports.default = PlayListContainer;
 
 /***/ }
 /******/ ]);
