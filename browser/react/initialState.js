@@ -4,6 +4,7 @@ const initialState = {
   selectedAlbum: {},
   selectedArtist: {},
   currentSong: {},
+  playLists: [],
   currentSongList: [],
   isPlaying: false,
   progress: 0

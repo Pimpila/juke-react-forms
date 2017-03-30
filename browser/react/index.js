@@ -11,11 +11,14 @@ import FilterableArtistsContainer from './containers/FilterableArtistsContainer'
 import FilterInput from './components/FilterInput';
 import NewPlaylist from './components/NewPlayList';
 import PlayListContainer from './containers/PlayListContainer';
+import PlayList from './components/PlayList';
 
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path='/' component={AppContainer} foo={'foo'}>
-      <Route path="/playlist" component={PlayListContainer} />
+      <Route path="/playlists" component={PlayListContainer} >
+        <Route path="/playlists/:playlistId" component={PlayList} />
+      </Route>
       <Route path="/albums" component={Albums} />
       <Route path="/albums/:albumId" component={Album} />
       <Route path="/artists" component={FilterableArtistsContainer}>

@@ -20,12 +20,11 @@ export default class PlayListContainer extends React.Component {
     this.setState({
       inputValue: event.target.value
     })
-    console.log('this.state inside collectInput', this.state)
   }
 
   showState (event) {
     event.preventDefault();
-    this.createPlayList(this.state.inputValue)
+    this.props.createPlayList(this.state.inputValue)
     this.setState({inputValue: ''})
   }
 
@@ -44,13 +43,7 @@ export default class PlayListContainer extends React.Component {
     null
   }
 
-  createPlayList(name) {
-    axios.post('/api/playlists/', {name})
-      .then(res => res.data)
-      .then(result => {
-        console.log(result)
-      });
-  }
+
 
   render() {
     console.log(this.state.inputValue);
@@ -58,6 +51,7 @@ export default class PlayListContainer extends React.Component {
       <div>
         <NewPlaylist collectInput={this.collectInput} showState={this.showState} inputValue={this.state.inputValue} setDisable={this.setDisable} />
         {this.validate()}
+        {this.props.children && React.cloneElement(this.props.children, {playLists: this.props.playLists})}
       </div>
     )
   }
